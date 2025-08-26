@@ -8,6 +8,7 @@ env/
 venv/
 ENV/
 .vscode/
+.idea/
 build/
 dist/
 *.egg-info

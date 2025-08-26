@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="fpsdemo",
-    version="0.1.0",
+    version="0.2.0",
     author="Antonín Šiška",
     author_email="siska.antonin.mail@example.com",
     description="3D FPS demo s PyQt6, kolizemi a minimapou",
