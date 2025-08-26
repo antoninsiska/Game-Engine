@@ -74,3 +74,40 @@ class ChunkWorld:
                 if dx*dx + dz*dz <= r2:
                     pts.append((px, py, pz))
         return pts
+
+    @staticmethod
+    def filter_points_by_fov(points, cam, forward, fov_rad):
+        """
+        Vrátí body, které leží v zorném poli kamery (FOV).
+        Zachová barvu, pokud je součástí bodu.
+
+        points: list (x,y,z) nebo (x,y,z,color)
+        cam: pozice kamery (cx,cy,cz)
+        forward: vektor dopředu
+        fov_rad: zorný úhel v radiánech
+        """
+        cx, cy, cz = cam
+        cos_half = math.cos(fov_rad / 2.0)
+        out = []
+
+        for p in points:
+            # Rozbalení barvy, pokud existuje
+            if len(p) == 4:
+                x, y, z, col = p
+            else:
+                x, y, z = p
+                col = None
+
+            dx, dy, dz = x - cx, y - cy, z - cz
+            d2 = dx * dx + dy * dy + dz * dz
+            if d2 < 1e-12:
+                continue
+
+            inv = 1.0 / math.sqrt(d2)
+            dirx, diry, dirz = dx * inv, dy * inv, dz * inv
+            dot = forward[0] * dirx + forward[1] * diry + forward[2] * dirz
+
+            if dot >= cos_half:
+                out.append((x, y, z, col) if col is not None else (x, y, z))
+
+        return out
