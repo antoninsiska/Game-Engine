@@ -4,7 +4,7 @@ from PyQt6.QtCore import Qt, QPoint, QRect, QTimer
 from PyQt6.QtGui import QPainter, QColor, QPen, QFont, QCursor, QBrush
 
 from .world import ChunkWorld, CHUNK_SIZE, WORLD_SEED
-from .objects import StaticWorld
+from .world import ChunkWorld, StaticWorld  
 
 # VFOV pro kameru
 VFOV_DEG = 70
