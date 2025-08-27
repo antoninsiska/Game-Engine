@@ -12,3 +12,4 @@ ENV/
 build/
 dist/
 *.egg-info
+.pypirc
