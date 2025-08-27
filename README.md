@@ -1,43 +1,43 @@
 # Game Engine 🎮
-> Jednoduchý FPS engine v Pythonu s PyQt6 — s procedurálním generováním světa, kolizemi, minimapou a podporou vlastních objektů.
+> A simple FPS engine in Python with PyQt6 — featuring procedural world generation, collisions, minimap, and custom objects support.
 
 ---
 
-## ✨ Hlavní funkce
-- 🕹 **FPS kamera** — plynulé pohyby, otáčení myší, sprint, skok, reset pozice  
-- 🌍 **Procedurální generování světa** — svět rozdělený na chunky, dynamické načítání bodů  
-- 🧱 **Statické objekty** — definované vzorem nebo generované automaticky  
-- 🛡 **Kolizní systém** — podpora AABB kolizí pro statické objekty  
-- 🗺 **Minimapa** — s možností rotace podle kamery, zobrazuje objekty a chunky  
-- 🎨 **Podpora barev** — každý objekt může mít vlastní barvu  
-- 🧩 **Jednoduché API** — snadné přidávání vlastních objektů, světů i chování  
-- ⚡ **Optimalizace** — FOV filtr, načítání chunků v okolí kamery  
+## ✨ Main Features
+- 🕹 **FPS camera** — smooth movement, mouse look, sprint, jump, reset position  
+- 🌍 **Procedural world generation** — world divided into chunks, dynamic point loading  
+- 🧱 **Static objects** — defined by pattern or generated automatically  
+- 🛡 **Collision system** — supports AABB collisions for static objects  
+- 🗺 **Minimap** — can rotate with the camera, displays objects and chunks  
+- 🎨 **Color support** — every object can have its own color  
+- 🧩 **Simple API** — easy to add custom objects, worlds, and behaviors  
+- ⚡ **Optimizations** — FOV filter, loading chunks around the camera  
 
 ---
 
-## 🛠 Instalace
+## 🛠 Installation
 
-### **1. Instalace z GitHubu**
+### **1. From GitHub**
 ```bash
 pip install git+https://github.com/antoninsiska/Game-Engine.git@latest
 ```
 
-### **2. Lokální vývoj**
+### **2. Local Development**
 ```bash
 git clone https://github.com/antoninsiska/Game-Engine.git
 cd Game-Engine
 pip install -e .
 ```
 
-### **3. Požadavky**
+### **3. Requirements**
 - Python **3.9+**
 - PyQt6 **6.5+**
 
 ---
 
-## 🎮 Spuštění demo aplikace
+## 🎮 Running the Demo App
 
-Po instalaci můžeš spustit výchozí demo:
+After installation you can run the default demo:
 
 ```bash
 game-engine
@@ -45,36 +45,36 @@ game-engine
 
 ---
 
-## ⌨️ Ovládání
+## ⌨️ Controls
 
-| Klávesa | Funkce |
-|---------|--------|
-| **W / A / S / D** | Pohyb |
-| **Myš** | Otáčení kamery |
+| Key | Action |
+|-----|--------|
+| **W / A / S / D** | Move |
+| **Mouse** | Camera rotation |
 | **Shift** | Sprint |
-| **Space** | Pohyb nahoru |
-| **Ctrl** / **C** | Pohyb dolů |
-| **B** | Reset pozice |
-| **M** | Přepnutí rotace minimapy |
-| **P** | Pauza hry |
-| **ESC** | Uvolnění myši |
+| **Space** | Move up |
+| **Ctrl** / **C** | Move down |
+| **B** | Reset position |
+| **M** | Toggle minimap rotation |
+| **P** | Pause |
+| **ESC** | Release mouse |
 
 ---
 
-## 🧩 Struktura projektu
+## 🧩 Project Structure
 
 ```
 game_engine/
-│── __init__.py      # veřejné API balíčku
-│── gui.py           # FPSDemo třída — GUI logika a renderování
-│── world.py         # ChunkWorld a StaticWorld — generování světa
-│── objects.py       # StaticObject — definice objektů
-│── main.py          # vstupní bod pro příkaz `game-engine`
+│── __init__.py      # public package API
+│── gui.py           # FPSDemo class — GUI logic & rendering
+│── world.py         # ChunkWorld and StaticWorld — world generation
+│── objects.py       # StaticObject — object definitions
+│── main.py          # entry point for `game-engine` command
 ```
 
 ---
 
-## 🔹 Základní použití v Pythonu
+## 🔹 Basic Usage in Python
 
 ```python
 import sys
@@ -89,9 +89,9 @@ sys.exit(app.exec())
 
 ---
 
-## 🧱 Přidávání vlastních objektů
+## 🧱 Adding Custom Objects
 
-### **1. Statický objekt**
+### **1. Static Object**
 ```python
 from game_engine import StaticObject
 
@@ -99,55 +99,55 @@ cube = StaticObject.from_size(
     3, 3,
     pos=(5, 0, 5),
     color="blue",
-    name="kostka",
-    collision=True  # ✅ hráč nemůže projít
+    name="cube",
+    collision=True  # ✅ player cannot pass through
 )
 game.static_world.objects.append(cube)
 ```
 
 ---
 
-## 🛡 Kolize
+## 🛡 Collisions
 
-Kolize fungují automaticky pro všechny objekty, které mají **`collision=True`**.  
-Engine používá **AABB kolize** (axis-aligned bounding box).
+Collisions work automatically for all objects with **`collision=True`**.  
+The engine uses **AABB collisions** (axis-aligned bounding boxes).
 
-### **Jak nastavit kolizní objekt**
+### **How to add a collidable object**
 ```python
 tree = StaticObject.from_size(
     2, 5,
     pos=(10, 0, 5),
     color="green",
-    name="strom",
+    name="tree",
     collision=True
 )
 game.static_world.objects.append(tree)
 ```
 
-### **Jak vytvořit dekoraci bez kolizí**
+### **How to add decoration without collisions**
 ```python
 flower = StaticObject.from_size(
     1, 1,
     pos=(3, 0, 3),
     color="yellow",
-    name="květina",
-    collision=False  # ✅ hráč může projít
+    name="flower",
+    collision=False  # ✅ player can pass through
 )
 game.static_world.objects.append(flower)
 ```
 
 ---
 
-## 🌍 Procedurální svět
+## 🌍 Procedural World
 
 ### **ChunkWorld**
-Generuje procedurální body do "chunků".
+Generates procedural points into "chunks".
 
 ```python
 from game_engine import ChunkWorld
 
 world = ChunkWorld()
-world.ensure_chunks_around(0, 0, 60)  # vytvoří chunky kolem kamery
+world.ensure_chunks_around(0, 0, 60)  # create chunks around the camera
 points = world.points_near(0, 0, 30)
 print(points)
 ```
@@ -157,7 +157,7 @@ print(points)
 ## 🧩 StaticWorld API
 
 ### **StaticWorld**
-Spravuje všechny statické objekty.
+Manages all static objects.
 
 ```python
 from game_engine import StaticWorld, StaticObject
@@ -167,41 +167,41 @@ cube = StaticObject.from_size(3, 3, pos=(5, 0, 5))
 world.objects.append(cube)
 ```
 
-#### **Metody:**
-| Metoda                | Popis |
-|-----------------------|--------------------------|
-| `points_near(x, z, radius)` | Vrátí body v okolí kamery |
-| `solids_aabb()` | Vrátí AABB boxy všech kolizních objektů |
+#### **Methods:**
+| Method | Description |
+|--------|-------------|
+| `points_near(x, z, radius)` | Returns points near the camera |
+| `solids_aabb()` | Returns AABB boxes of all collidable objects |
 
 ---
 
 ## 🎨 StaticObject API
 
-### **Vytvoření vlastního objektu**
+### **Creating a custom object**
 ```python
 obj = StaticObject(
     pattern=[[1,1,1],[1,1,1],[1,1,1]],
     pos=(5, 0, 5),
-    name="kostka",
+    name="cube",
     color="red",
     cell_size=1.0,
     collision=True
 )
 ```
 
-#### **Parametry:**
-| Parametr | Typ | Popis |
-|----------|------|------------------------------|
-| `pattern` | list[list[int]] | Vzor objektu |
-| `pos` | tuple | Pozice (x,y,z) |
-| `name` | str | Název objektu |
-| `color` | QColor/str | Barva |
-| `cell_size` | float | Velikost jedné buňky |
-| `collision` | bool | Povolit kolize |
+#### **Parameters:**
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `pattern` | list[list[int]] | Object pattern |
+| `pos` | tuple | Position (x,y,z) |
+| `name` | str | Object name |
+| `color` | QColor/str | Color |
+| `cell_size` | float | Size of one cell |
+| `collision` | bool | Enable collisions |
 
 ---
 
-## 🕹 Vytvoření vlastní hry (`MyGame`)
+## 🕹 Creating Your Own Game (`MyGame`)
 
 ```python
 import sys
@@ -212,12 +212,12 @@ class MyGame(FPSDemo):
     def __init__(self):
         super().__init__()
 
-        # Vlastní kolizní objekt
+        # Custom collidable object
         cube = StaticObject.from_size(
             3, 3,
             pos=(5, 0, 5),
             color="blue",
-            name="kostka",
+            name="cube",
             collision=True
         )
         self.static_world.objects.append(cube)
@@ -229,30 +229,30 @@ if __name__ == "__main__":
     sys.exit(app.exec())
 ```
 
-Spuštění:
+Run:
 ```bash
 python main.py
 ```
 
 ---
 
-## 🧰 Debugování a tipy
-- **Zobrazení kolizních boxů** – můžeme přidat debug overlay  
-- **Úprava FOV** – změň `VFOV_DEG` v `gui.py`  
-- **Úprava rychlosti hráče** – nastav `self.move_speed`  
-- **Úprava chunků** – změň `CHUNK_SIZE` v `world.py`  
-- **Přidání minimapy** – je vestavěná, zapíná se klávesou `M`
+## 🧰 Debugging & Tips
+- **Show collision boxes** – add a debug overlay  
+- **Adjust FOV** – change `VFOV_DEG` in `gui.py`  
+- **Change player speed** – set `self.move_speed`  
+- **Adjust chunks** – modify `CHUNK_SIZE` in `world.py`  
+- **Toggle minimap** – built-in, press `M`  
 
 ---
 
-## 🛠 Vývoj
+## 🛠 Development
 
-### **Aktualizace enginu**
+### **Update the engine**
 ```bash
 pip install --upgrade git+https://github.com/antoninsiska/Game-Engine.git@latest
 ```
 
-### **Lokální vývoj**
+### **Local Development**
 ```bash
 git clone https://github.com/antoninsiska/Game-Engine.git
 cd Game-Engine
@@ -261,5 +261,5 @@ pip install -e .
 
 ---
 
-## 📜 Licence
+## 📜 License
 MIT © 2025 Antonín Šiška
